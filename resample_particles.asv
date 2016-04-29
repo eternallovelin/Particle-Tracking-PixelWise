@@ -1,0 +1,23 @@
+function [X,rec_new] = resample_particles(X, L_log,rec_old)
+bwidth = rea_o
+% Scaling likelihood to range [0,1]
+%Q = L / sum(L, 2);
+%R = cumsum(Q, 2);
+
+L = exp(L_log - max(L_log));
+L = L/(max(L,2) - min(L,2)) ;
+
+% Select particles of >= 0.7 and new bounding box 
+L_ind = (L>0.7);
+X = X(:,L_ind); 
+rec_new = [
+
+% Generating Random Numbers
+
+N = size(X, 2);
+T = rand(1, N);
+
+% Resampling
+
+[~, I] = histc(T, R);
+X = X(:, I + 1);
